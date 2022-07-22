@@ -2,7 +2,7 @@
 {
     public interface IBookingTime
     {
-        public DateTime CheckIn { get; set; }
-        public DateTime Checkout { get; set; }
+        public DateTime CheckIn { get; }
+        public DateTime CheckOut { get; }
     }
 }

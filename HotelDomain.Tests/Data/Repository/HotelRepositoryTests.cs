@@ -49,7 +49,7 @@ namespace HotelDomain.Tests.Data.Repository
             {
                 RoomId = _room4Id,
                 CheckIn = new DateTime(2010, 10, 08),
-                Checkout = new DateTime(2010, 10, 12)
+                CheckOut = new DateTime(2010, 10, 12)
             });
 
             context.SaveChanges();
@@ -85,7 +85,7 @@ namespace HotelDomain.Tests.Data.Repository
         public async Task AvailableRooms_All()
         {
             // Act
-            var result = await _hotelRepository.GetRoomsStatus(_hotelId,
+            var result = await _hotelRepository.GetRoomAvailability(_hotelId,
                 new DateTime(2010, 10, 05),
                 new DateTime(2010, 10, 07));
 
@@ -98,7 +98,7 @@ namespace HotelDomain.Tests.Data.Repository
         public async Task AvailableRooms_HasBooking()
         {
             // Act
-            var result = await _hotelRepository.GetRoomsStatus(_hotelId,
+            var result = await _hotelRepository.GetRoomAvailability(_hotelId,
                 new DateTime(2010, 10, 05),
                 new DateTime(2010, 10, 10));
 

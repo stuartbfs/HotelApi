@@ -7,6 +7,6 @@ namespace HotelDomain.Data.Repository
     {
         Task<bool> IsRoomBooked(Guid roomId, DateTime checkIn, DateTime checkOut);
 
-        Task<List<HotelRoomBookings>> GetRoomsStatus(Guid hotelId, DateTime checkIn, DateTime checkOut);
+        Task<List<HotelRoomAvailability>> GetRoomAvailability(Guid hotelId, DateTime checkIn, DateTime checkOut);
     }
 }

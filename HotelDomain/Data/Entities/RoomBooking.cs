@@ -10,6 +10,6 @@ namespace HotelDomain.Data.Entities
         public Room Room { get; set; }
 
         public DateTime CheckIn { get; set; }
-        public DateTime Checkout { get; set; }
+        public DateTime CheckOut { get; set; }
     }
 }

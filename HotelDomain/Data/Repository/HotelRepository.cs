@@ -23,17 +23,17 @@ namespace HotelDomain.Data.Repository
 
         public async Task<bool> IsRoomBooked(Guid roomId, DateTime checkIn, DateTime checkOut)
         {
-            var roomBooking = new RoomBooking { CheckIn = checkIn, Checkout = checkOut };
+            var roomBooking = new RoomBooking { CheckIn = checkIn, CheckOut = checkOut };
 
             return await _context.RoomBookings.Where(x => x.Room.RoomId == roomId)
                 .Where(BookingTimes.ClashExpr<RoomBooking, RoomBooking>(roomBooking))
                 .AnyAsync();
         }
 
-        public async Task<List<HotelRoomBookings>> GetRoomsStatus(Guid hotelId, DateTime checkIn, DateTime checkOut)
+        public async Task<List<HotelRoomAvailability>> GetRoomAvailability(Guid hotelId, DateTime checkIn, DateTime checkOut)
         {
             return await _context.Rooms.Where(x => x.HotelId == hotelId)
-                .Select(HotelRoomBookings.Projection(checkIn, checkOut))
+                .Select(HotelRoomAvailability.Projection(checkIn, checkOut))
                 .ToListAsync();
         }
     }

@@ -4,7 +4,7 @@ using HotelDomain.Model;
 
 namespace HotelDomain.Data.Projections
 {
-    public class HotelRoomBookings
+    public class HotelRoomAvailability
     {
         public Guid HotelId { get; set; }
         public string HotelName { get; set; }
@@ -17,12 +17,12 @@ namespace HotelDomain.Data.Projections
 
         public bool HasBooking { get; set; }
 
-        public static Expression<Func<Room, HotelRoomBookings>> Projection(DateTime checkIn, DateTime checkOut)
+        public static Expression<Func<Room, HotelRoomAvailability>> Projection(DateTime checkIn, DateTime checkOut)
         {
-            var roomBooking = new RoomBooking { CheckIn = checkIn, Checkout = checkOut };
+            var roomBooking = new RoomBooking { CheckIn = checkIn, CheckOut = checkOut };
             var clashFunc = BookingTimes.ClashExpr<RoomBooking, RoomBooking>(roomBooking);
 
-            return room => new HotelRoomBookings
+            return room => new HotelRoomAvailability
             {
                 HotelId = room.HotelId,
                 HotelName = room.Hotel.Name,

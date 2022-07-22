@@ -7,8 +7,23 @@ namespace HotelApi.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        [HttpGet("{hotelId}")]
-        public IActionResult Availablity([FromRoute]Guid hotelId, [FromQuery] DateTime checkInDate, [FromQuery] DateTime checkOutDate, [FromQuery] int numberOfPeople)
+        [HttpGet("{hotelId}/availability")]
+        public IActionResult Availability(
+            [FromRoute] Guid hotelId, 
+            [FromQuery] DateTime checkInDate, 
+            [FromQuery] DateTime checkOutDate, 
+            [FromQuery] int partySize)
+        {
+            return Ok();
+        }
+
+        [HttpGet("availability")]
+        public IActionResult Availability(
+            [FromQuery] DateTime checkInDate, 
+            [FromQuery] DateTime checkOutDate, 
+            [FromQuery] int partySize, 
+            [FromQuery] int page = 1, 
+            [FromQuery] int pageSize = 10)
         {
             return Ok();
         }
