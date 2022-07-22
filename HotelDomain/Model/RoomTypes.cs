@@ -16,7 +16,7 @@ namespace HotelDomain.Model
 
         public static readonly RoomType Deluxe = new RoomType
         {
-            RoomTypeId = new Guid("8dcbdaae-6f31-4fc9-96b5-fa363a92f68a"), Name = nameof(Deluxe), Capacity = 2
+            RoomTypeId = new Guid("e1cc15ec-2df4-45d6-8ee8-f7fcdc33680e"), Name = nameof(Deluxe), Capacity = 2
         };
 
         public static readonly RoomType[] All = {

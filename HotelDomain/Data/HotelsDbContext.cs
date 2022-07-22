@@ -5,6 +5,12 @@ namespace HotelDomain.Data
 {
     public class HotelsDbContext : DbContext
     {
+        public HotelsDbContext(DbContextOptions<HotelsDbContext> options)
+            : base(options)
+        {
+
+        }
+
         public DbSet<Hotel> Hotels { get; set; }
 
         public DbSet<Room> Rooms { get; set; }

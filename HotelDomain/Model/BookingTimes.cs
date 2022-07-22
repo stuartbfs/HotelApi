@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace HotelDomain.Model
 {
@@ -19,8 +13,11 @@ namespace HotelDomain.Model
             where TEntity : class, IBookingTime
             where TParam : IBookingTime
         {
-            return entity => (entity.CheckIn.Date <= bookingParam.CheckIn.Date && bookingParam.Checkout.Date <= entity.Checkout.Date) ||
-                             (bookingParam.CheckIn.Date <= entity.CheckIn.Date && entity.Checkout.Date <= bookingParam.Checkout.Date);
+            return entity =>
+                (entity.CheckIn.Date <= bookingParam.CheckIn.Date && bookingParam.Checkout.Date <= entity.Checkout.Date) ||
+                (bookingParam.CheckIn.Date <= entity.CheckIn.Date && entity.Checkout.Date <= bookingParam.Checkout.Date) ||
+                (entity.CheckIn.Date >= bookingParam.CheckIn.Date && entity.CheckIn.Date < bookingParam.Checkout.Date) ||
+                (bookingParam.CheckIn.Date >= entity.CheckIn.Date && bookingParam.CheckIn.Date < entity.Checkout.Date);
         }
     }
 }

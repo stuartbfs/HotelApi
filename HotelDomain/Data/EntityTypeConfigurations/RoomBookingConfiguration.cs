@@ -9,7 +9,7 @@ namespace HotelDomain.Data.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<RoomBooking> builder)
         {
             builder.HasOne(x => x.Room)
-                   .WithMany()
+                   .WithMany(x => x.RoomBookings)
                    .IsRequired();
         }
     }

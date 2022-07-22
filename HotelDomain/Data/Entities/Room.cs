@@ -11,5 +11,7 @@
 
         public Guid RoomTypeId { get; set; }
         public RoomType RoomType { get; set; }
+
+        public ICollection<RoomBooking> RoomBookings { get; set; }
     }
 }

@@ -120,6 +120,20 @@ namespace HotelDomain.Tests.Model
                 new BookingTime { CheckIn = new DateTime(2010, 10, 06), Checkout = new DateTime(2010, 10, 09) },
                 true
             };
+
+            yield return new object[]
+            {
+                new BookingTime { CheckIn = new DateTime(2010, 10, 05), Checkout = new DateTime(2010, 10, 10) },
+                new BookingTime { CheckIn = new DateTime(2010, 10, 08), Checkout = new DateTime(2010, 10, 12) },
+                true
+            };
+
+            yield return new object[]
+            {
+                new BookingTime { CheckIn = new DateTime(2010, 10, 05), Checkout = new DateTime(2010, 10, 10) },
+                new BookingTime { CheckIn = new DateTime(2010, 10, 03), Checkout = new DateTime(2010, 10, 07) },
+                true
+            };
         }
     }
 }
