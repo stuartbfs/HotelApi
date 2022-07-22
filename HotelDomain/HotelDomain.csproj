@@ -8,9 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Data\Entities\" />
-    <Folder Include="Model\" />
     <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
   </ItemGroup>
 
 </Project>
