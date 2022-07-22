@@ -8,6 +8,9 @@ namespace HotelDomain.Data.Entities
 
         public Guid RoomId { get; set; }
         public Room Room { get; set; }
+        
+        public Guid BookingId { get; set; }
+        public Booking Booking { get; set; }
 
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }

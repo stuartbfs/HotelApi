@@ -25,10 +25,10 @@ namespace HotelDomain.Data.Projections
             return room => new HotelRoomAvailability
             {
                 HotelId = room.HotelId,
-                HotelName = room.Hotel.Name,
+                HotelName = room.Hotel.HotelName,
 
                 RoomId = room.RoomId,
-                RoomName = room.Name,
+                RoomName = room.RoomName,
 
                 RoomType = room.RoomType.Name,
                 RoomCapacity = room.RoomType.Capacity,

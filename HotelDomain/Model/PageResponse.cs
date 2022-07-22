@@ -22,6 +22,6 @@
         {
         }
 
-        public List<TItemType> Items { get; set; }
+        public List<TItemType> Items { get; set; } = new List<TItemType>();
     }
 }

@@ -13,6 +13,22 @@ namespace HotelDomain.Data.Repository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public async Task<PageResponse<HotelDetails>> FindHotels(string name, int page, int pageSize)
+        {
+            var hotelsQuery = _context.Hotels
+                .Where(x => EF.Functions.Like(x.HotelName, $"%{name}%"))
+                .Select(HotelDetails.Projection);
+                
+            var count = await hotelsQuery.CountAsync();
+                
+            if (count == 0) return new PageResponse<HotelDetails>(page, pageSize, 0);
+                
+            return new PageResponse<HotelDetails>(page, pageSize, count)
+            {
+                Items = await hotelsQuery.ToListAsync()
+            };
+        }
+
         public async Task<PageResponse<HotelRoomAvailability>> GetRoomAvailability(
             DateTime checkIn, 
             DateTime checkOut,

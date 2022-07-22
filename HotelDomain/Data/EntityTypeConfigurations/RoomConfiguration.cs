@@ -8,7 +8,7 @@ namespace HotelDomain.Data.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Room> builder)
         {
-            builder.Property(x => x.Name).HasMaxLength(100);
+            builder.Property(x => x.RoomName).HasMaxLength(100);
 
             builder.HasOne(x => x.RoomType)
                    .WithMany()

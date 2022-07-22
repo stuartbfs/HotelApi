@@ -33,15 +33,15 @@ namespace HotelDomain.Tests.Data.Repository
             context.Hotels.Add(new Hotel
             {
                 HotelId = _hotelId,
-                Name = "hotel paradiso",
+                HotelName = "hotel paradiso",
                 Rooms = new List<Room>
                 {
-                    new Room { Name = "Room 1", RoomTypeId = RoomTypes.Single.RoomTypeId },
-                    new Room { Name = "Room 2", RoomTypeId = RoomTypes.Double.RoomTypeId },
-                    new Room { Name = "Room 3", RoomTypeId = RoomTypes.Double.RoomTypeId },
-                    new Room { RoomId = _room4Id, Name = "Room 4", RoomTypeId = RoomTypes.Single.RoomTypeId },
-                    new Room { Name = "Room 5", RoomTypeId = RoomTypes.Deluxe.RoomTypeId },
-                    new Room { Name = "Room 6", RoomTypeId = RoomTypes.Single.RoomTypeId }
+                    new Room { RoomName = "Room 1", RoomTypeId = RoomTypes.Single.RoomTypeId },
+                    new Room { RoomName = "Room 2", RoomTypeId = RoomTypes.Double.RoomTypeId },
+                    new Room { RoomName = "Room 3", RoomTypeId = RoomTypes.Double.RoomTypeId },
+                    new Room { RoomId = _room4Id, RoomName = "Room 4", RoomTypeId = RoomTypes.Single.RoomTypeId },
+                    new Room { RoomName = "Room 5", RoomTypeId = RoomTypes.Deluxe.RoomTypeId },
+                    new Room { RoomName = "Room 6", RoomTypeId = RoomTypes.Single.RoomTypeId }
                 }
             });
 
