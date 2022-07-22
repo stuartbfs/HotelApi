@@ -14,4 +14,14 @@
         public int TotalCount { get; }
         public int TotalPages => (int)Math.Round(Math.Ceiling(TotalCount/(decimal)PageSize));
     }
+    
+    public class PageResponse<TItemType> : PageResponse
+    {
+        public PageResponse(int page, int pageSize, int totalCount)
+            : base(page, pageSize, totalCount)
+        {
+        }
+
+        public List<TItemType> Items { get; set; }
+    }
 }
