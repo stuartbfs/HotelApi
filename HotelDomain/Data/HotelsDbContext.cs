@@ -17,6 +17,8 @@ namespace HotelDomain.Data
 
         public DbSet<RoomBooking> RoomBookings { get; set; }
 
+        public DbSet<Booking> Bookings { get; set; }
+
         public DbSet<RoomType> RoomTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

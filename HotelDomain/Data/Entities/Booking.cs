@@ -10,5 +10,7 @@
         public string LastName { get; set; }
         
         public DateTime BookingDate { get; set; }
+
+        public ICollection<RoomBooking> Rooms { get; set; }
     }
 }

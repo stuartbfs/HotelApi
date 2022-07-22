@@ -1,6 +1,7 @@
 ﻿using HotelDomain.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace HotelDomain.Data.EntityTypeConfigurations
 {
@@ -9,7 +10,10 @@ namespace HotelDomain.Data.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
             builder.Property(x => x.BookingNumber).ValueGeneratedOnAdd();
+
             builder.HasIndex(x => x.BookingNumber).IsUnique();
+
+            builder.Property(x => x.BookingDate).ValueGeneratedOnAdd();
 
             builder.Property(x => x.FirstName).HasMaxLength(50);
             builder.Property(x => x.LastName).HasMaxLength(50);
