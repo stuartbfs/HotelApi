@@ -1,6 +1,8 @@
+using FluentValidation;
 using HotelApi.Infrastructure;
 using HotelDomain.Data;
-using HotelDomain.Data.Seed;
+using HotelDomain.Queries.FindHotel;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,24 +27,10 @@ builder.Services.AddDbContext<HotelsDbContext>((sp, options) =>
     options.AddInterceptors(new DbAccessTokenInterceptor(sp.GetRequiredService<IDbAccessTokenProvider>()));
 });
 
+builder.Services.AddMediatR(typeof(FindHotelQueryHandler).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<FindHotelRequestValidator>();
+
 var app = builder.Build();
-
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
-//    try
-//    {
-//        var context = services.GetRequiredService<HotelsDbContext>();
-//        HotelsDbContextDataSeed.Initialize(context);
-//    }
-//    catch (Exception ex)
-//    {
-//        var logger = services.GetRequiredService<ILogger<Program>>();
-//        logger.LogError(ex, "An error occurred creating the DB.");
-//        throw;
-//    }
-//}
-
 
 // Configure the HTTP request pipeline.
 

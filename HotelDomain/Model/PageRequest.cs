@@ -13,12 +13,5 @@ namespace HotelDomain.Model
         public int Page { get; }
         
         public int PageSize { get; }
-        
-        public virtual void ThrowIfInvalid()
-        {
-            if (Page <= 0) throw new ValidationException("Page must be greater than 0");
-
-            if (PageSize <= 0) throw new ValidationException("PageSize must be greater than 0");
-        }
     }
 }

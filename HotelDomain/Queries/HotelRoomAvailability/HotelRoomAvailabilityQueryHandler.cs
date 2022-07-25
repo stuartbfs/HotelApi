@@ -1,10 +1,11 @@
 ﻿using HotelDomain.Data.Repository;
 using HotelDomain.Exceptions;
 using HotelDomain.Model;
+using MediatR;
 
 namespace HotelDomain.Queries.HotelRoomAvailability
 {
-    public class HotelRoomAvailabilityQueryHandler : IQueryHandler<HotelRoomAvailabilityRequest, HotelRoomAvailabilityResponse>
+    public class HotelRoomAvailabilityQueryHandler : IRequestHandler<HotelRoomAvailabilityRequest, HotelRoomAvailabilityResponse>
     {
         private readonly IHotelRepository _hotelRepository;
 
@@ -13,10 +14,8 @@ namespace HotelDomain.Queries.HotelRoomAvailability
             _hotelRepository = hotelRepository ?? throw new ArgumentNullException(nameof(hotelRepository));
         }
 
-        public async Task<HotelRoomAvailabilityResponse> Handle(HotelRoomAvailabilityRequest request)
+        public async Task<HotelRoomAvailabilityResponse> Handle(HotelRoomAvailabilityRequest request, CancellationToken cancellationToken)
         {
-            BookingTimes.ThrowIfInvalid(request);
-            
             var results = await _hotelRepository.GetRoomAvailability(request.HotelId, request.CheckIn, request.CheckOut);
             if (results is null || results.Count == 0)
             {

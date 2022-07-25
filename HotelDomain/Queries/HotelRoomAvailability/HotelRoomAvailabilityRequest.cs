@@ -1,8 +1,9 @@
 ﻿using HotelDomain.Model;
+using MediatR;
 
 namespace HotelDomain.Queries.HotelRoomAvailability
 {
-    public class HotelRoomAvailabilityRequest : IBookingTime
+    public class HotelRoomAvailabilityRequest : IBookingTime, IRequest<HotelRoomAvailabilityResponse>
     {
         public HotelRoomAvailabilityRequest(Guid hotelId, DateTime checkIn, DateTime checkOut, int partySize)
         {

@@ -1,9 +1,10 @@
 ﻿using HotelDomain.Data.Repository;
 using HotelDomain.Model;
+using MediatR;
 
 namespace HotelDomain.Queries.HotelsAvailability
 {
-    public class HotelsAvailabilityQueryHandler : IQueryHandler<HotelsAvailabilityRequest, HotelsAvailabilityResponse>
+    public class HotelsAvailabilityQueryHandler : IRequestHandler<HotelsAvailabilityRequest, HotelsAvailabilityResponse>
     {
         private readonly IHotelsRepository _hotelsRepository;
         
@@ -12,7 +13,7 @@ namespace HotelDomain.Queries.HotelsAvailability
             _hotelsRepository = hotelsRepository ?? throw new ArgumentNullException(nameof(hotelsRepository));
         }
         
-        public async Task<HotelsAvailabilityResponse> Handle(HotelsAvailabilityRequest request)
+        public async Task<HotelsAvailabilityResponse> Handle(HotelsAvailabilityRequest request, CancellationToken cancellationToken)
         {
             request.ThrowIfInvalid();
             

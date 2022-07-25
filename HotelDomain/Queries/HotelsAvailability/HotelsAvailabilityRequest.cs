@@ -1,8 +1,9 @@
 ﻿using HotelDomain.Model;
+using MediatR;
 
 namespace HotelDomain.Queries.HotelsAvailability
 {
-    public class HotelsAvailabilityRequest : PageRequest, IBookingTime
+    public class HotelsAvailabilityRequest : PageRequest, IRequest<HotelsAvailabilityResponse>, IBookingTime
     {
         public HotelsAvailabilityRequest(DateTime checkIn, DateTime checkOut, int partySize, int page, int pageSize)
             : base(page, pageSize)
@@ -15,11 +16,5 @@ namespace HotelDomain.Queries.HotelsAvailability
         public DateTime CheckIn { get; }
         public DateTime CheckOut { get; }
         public int PartySize { get; }
-
-        public override void ThrowIfInvalid()
-        {
-            BookingTimes.ThrowIfInvalid(this);
-            base.ThrowIfInvalid();
-        }
     }
 }

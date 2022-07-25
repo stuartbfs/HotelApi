@@ -8,11 +8,10 @@ namespace HotelDomain.Data.Seed
 {
     public static class HotelsDbContextDataSeed
     {
-        public static void Initialize(HotelsDbContext context)
+        public static async Task Initialize(HotelsDbContext context)
         {
-            context.Database.EnsureCreated();
-
-
+            await context.Database.EnsureDeletedAsync();
+            await context.Database.EnsureCreatedAsync();
         }
     }
 }

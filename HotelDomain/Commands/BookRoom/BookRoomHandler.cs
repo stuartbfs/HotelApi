@@ -1,17 +1,11 @@
 ﻿using HotelDomain.Data.Repository;
+using MediatR;
 
 namespace HotelDomain.Commands.BookRoom
 {
-    public class BookingHandler : ICommandHandler<BookRoomRequest, BookRoomResponse>
+    public class BookingHandler : IRequestHandler<BookRoomRequest, BookRoomResponse>
     {
-        private readonly IBookingRepository _bookingRepository;
-
-        public BookingHandler(IBookingRepository bookingRepository)
-        {
-            _bookingRepository = bookingRepository ?? throw new ArgumentNullException(nameof(bookingRepository));
-        }
-
-        public async Task<BookRoomResponse> Handle(BookRoomRequest request)
+        public Task<BookRoomResponse> Handle(BookRoomRequest request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

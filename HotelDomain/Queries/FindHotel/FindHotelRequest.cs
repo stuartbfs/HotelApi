@@ -1,9 +1,10 @@
 ﻿using HotelDomain.Exceptions;
 using HotelDomain.Model;
+using MediatR;
 
 namespace HotelDomain.Queries.FindHotel
 {
-    public class FindHotelRequest : PageRequest
+    public class FindHotelRequest : PageRequest, IRequest<FindHotelResponse>
     {
         public FindHotelRequest(string searchName, int page, int pageSize)
             : base(page, pageSize)
@@ -12,12 +13,5 @@ namespace HotelDomain.Queries.FindHotel
         }
         
         public string SearchName { get; }
-        
-        public override void ThrowIfInvalid()
-        {
-            if (!string.IsNullOrWhiteSpace(SearchName)) return;
-            
-            throw new ValidationException("Name required");
-        }
     }
 }

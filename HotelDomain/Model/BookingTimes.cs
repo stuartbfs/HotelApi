@@ -1,22 +1,9 @@
 ﻿using System.Linq.Expressions;
-using HotelDomain.Exceptions;
 
 namespace HotelDomain.Model
 {
     public class BookingTimes
     {
-        public static bool IsValid(IBookingTime bookingTime)
-        {
-            return bookingTime.CheckIn.Date < bookingTime.CheckOut.Date;
-        }
-
-        public static void ThrowIfInvalid(IBookingTime bookingTime)
-        {
-            if (IsValid(bookingTime)) return;
-
-            throw new ValidationException("CheckIn must be before Checkout");
-        }
-
         public static Expression<Func<TEntity, bool>> ClashExpr<TEntity, TParam>(TParam bookingParam)
             where TEntity : class, IBookingTime
             where TParam : IBookingTime
