@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
-using HotelDomain.Data;
+﻿using HotelDomain.Data;
 using HotelDomain.Data.Entities;
 using HotelDomain.Data.Repository;
 using HotelDomain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 
 namespace HotelDomain.Tests.Data.Repository
 {
@@ -39,12 +32,6 @@ namespace HotelDomain.Tests.Data.Repository
             context.Database.EnsureCreated();
             
 
-            //builder.Property(x => x.BookingNumber).ValueGeneratedOnAdd();
-
-            //builder.HasIndex(x => x.BookingNumber).IsUnique();
-
-            //builder.Property(x => x.BookingDate).ValueGeneratedOnAdd();
-
             context.Hotels.Add(new Hotel
             {
                 HotelId = _hotelId,
@@ -71,63 +58,5 @@ namespace HotelDomain.Tests.Data.Repository
 
             _bookingRepository = new BookingRepository(context);
         }
-
-        [Fact]
-        public async Task CreateBooking_Success()
-        {
-            //// Arrange
-            //var generator = new BookingGenerator(
-            //    "Boris", 
-            //    "Johnson", 
-            //    new DateTime(2010, 10, 05),
-            //    new DateTime(2010, 10, 07), 
-            //    2);
-
-            //// Act
-            //var result = await _bookingRepository.CreateBooking(
-            //    generator,
-            //    _hotelId
-            //);
-
-            //result.Should().NotBeNull();
-        }
-
-        //[Fact]
-        //public async Task IsRoomBooked_True()
-        //{
-        //    // Act
-        //    var result = await _hotelRepository.IsRoomBooked(_room4Id,
-        //        new DateTime(2010, 10, 05),
-        //        new DateTime(2010, 10, 10));
-
-        //    // Assert
-        //    result.Should().BeTrue();
-        //}
-
-        //[Fact]
-        //public async Task AvailableRooms_All()
-        //{
-        //    // Act
-        //    var result = await _hotelRepository.GetRoomAvailability(_hotelId,
-        //        new DateTime(2010, 10, 05),
-        //        new DateTime(2010, 10, 07));
-
-        //    // Assert
-        //    result.Should().HaveCount(6);
-        //    result.Should().NotContain(x => x.HasBooking);
-        //}
-
-        //[Fact]
-        //public async Task AvailableRooms_HasBooking()
-        //{
-        //    // Act
-        //    var result = await _hotelRepository.GetRoomAvailability(_hotelId,
-        //        new DateTime(2010, 10, 05),
-        //        new DateTime(2010, 10, 10));
-
-        //    // Assert
-        //    result.Should().HaveCount(6);
-        //    result.Should().ContainSingle(x => x.HasBooking && x.RoomId == _room4Id);
-        //}
     }
 }

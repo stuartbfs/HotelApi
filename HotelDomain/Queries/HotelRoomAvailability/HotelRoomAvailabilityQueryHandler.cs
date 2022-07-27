@@ -29,7 +29,7 @@ namespace HotelDomain.Queries.HotelRoomAvailability
             return new HotelRoomAvailabilityResponse(
                 request.HotelId,
                 results[0].HotelName,
-                capacity <= request.PartySize,
+                capacity >= request.PartySize,
                 rooms);
         }
     }

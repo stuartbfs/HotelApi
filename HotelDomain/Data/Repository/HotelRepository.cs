@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using HotelDomain.Data;
-using HotelDomain.Data.Entities;
+﻿using HotelDomain.Data.Entities;
 using HotelDomain.Data.Projections;
 using HotelDomain.Model;
 using Microsoft.EntityFrameworkCore;

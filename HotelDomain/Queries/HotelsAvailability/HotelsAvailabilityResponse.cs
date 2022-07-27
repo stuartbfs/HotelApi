@@ -9,6 +9,6 @@ namespace HotelDomain.Queries.HotelsAvailability
         {
         }
 
-        public List<HotelRooms> Hotels { get; set; }
+        public List<HotelRooms> Hotels { get; set; } = new List<HotelRooms>();
     }
 }

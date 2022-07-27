@@ -16,16 +16,10 @@ namespace HotelApi.Controllers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        [HttpPost(nameof(Seed))]
-        public IActionResult Seed()
-        {
-            return Ok();
-        }
-
         [HttpPost(nameof(Reset))]
-        public IActionResult Reset()
+        public async Task<IActionResult> Reset()
         {
-            HotelsDbContextDataSeed.Initialize(_context);
+            await HotelsDbContextDataSeed.Initialize(_context);
             return Ok();
         }
     }

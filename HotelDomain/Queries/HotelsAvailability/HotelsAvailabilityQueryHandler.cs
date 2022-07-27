@@ -15,8 +15,6 @@ namespace HotelDomain.Queries.HotelsAvailability
         
         public async Task<HotelsAvailabilityResponse> Handle(HotelsAvailabilityRequest request, CancellationToken cancellationToken)
         {
-            request.ThrowIfInvalid();
-            
             var results = await _hotelsRepository.GetRoomAvailability(
                 request.CheckIn, 
                 request.CheckOut, 

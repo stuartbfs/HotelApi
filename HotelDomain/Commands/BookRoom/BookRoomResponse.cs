@@ -2,6 +2,6 @@
 {
     public class BookRoomResponse
     {
-        public string BookingRef { get; set; }
+        public string BookingRef { get; set; } = "";
     }
 }

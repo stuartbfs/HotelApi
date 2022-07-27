@@ -1,6 +1,8 @@
 using FluentValidation;
 using HotelApi.Infrastructure;
+using HotelDomain.Behaviours;
 using HotelDomain.Data;
+using HotelDomain.Data.Repository;
 using HotelDomain.Queries.FindHotel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,12 @@ builder.Services.AddDbContext<HotelsDbContext>((sp, options) =>
 
 builder.Services.AddMediatR(typeof(FindHotelQueryHandler).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<FindHotelRequestValidator>();
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
+// Repository
+builder.Services.AddTransient<IHotelsRepository, HotelsRepository>();
+builder.Services.AddTransient<IHotelRepository, HotelRepository>();
+builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 
 var app = builder.Build();
 

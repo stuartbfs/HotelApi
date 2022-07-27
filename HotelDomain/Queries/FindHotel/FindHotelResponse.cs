@@ -9,7 +9,7 @@ namespace HotelDomain.Queries.FindHotel
             : base(page, pageSize, totalCount)
         {
         }
-        
-        public List<HotelDetails> Hotels { get; set; }
+
+        public List<HotelDetails> Hotels { get; set; } = new List<HotelDetails>();
     }
 }

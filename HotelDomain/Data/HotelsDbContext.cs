@@ -11,15 +11,15 @@ namespace HotelDomain.Data
 
         }
 
-        public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Hotel> Hotels { get; set; } = null!;
 
-        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Room> Rooms { get; set; } = null!;
 
-        public DbSet<RoomBooking> RoomBookings { get; set; }
+        public DbSet<RoomBooking> RoomBookings { get; set; } = null!;
 
-        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Booking> Bookings { get; set; } = null!;
 
-        public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

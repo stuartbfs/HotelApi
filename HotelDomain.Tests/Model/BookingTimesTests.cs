@@ -18,31 +18,6 @@ namespace HotelDomain.Tests.Model
         }
 
         [Theory]
-        [MemberData(nameof(IsValidTestCases))]
-        public void IsValid_Tests(BookingTime bookingTime, bool isValid)
-        {
-            var result = BookingTimes.IsValid(bookingTime);
-
-            result.Should().Be(isValid);
-        }
-
-        public static IEnumerable<object[]> IsValidTestCases()
-        {
-            yield return new object[]
-            {
-                new BookingTime { CheckIn = new DateTime(2010, 10, 05), CheckOut = new DateTime(2010, 10, 06) }, true
-            };
-            yield return new object[]
-            {
-                new BookingTime { CheckIn = new DateTime(2010, 10, 05), CheckOut = new DateTime(2010, 10, 05) }, false
-            };
-            yield return new object[]
-            {
-                new BookingTime { CheckIn = new DateTime(2010, 10, 05), CheckOut = new DateTime(2010, 10, 04) }, false
-            };
-        }
-        
-        [Theory]
         [MemberData(nameof(ClashTestCases))]
         public void ClashExpr_Tests(BookingTime left, BookingTime right, bool hasClash)
         {

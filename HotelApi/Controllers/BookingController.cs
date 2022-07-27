@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HotelApi.Infrastructure;
+using HotelDomain.Commands.BookRoom;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelApi.Controllers
@@ -7,19 +9,24 @@ namespace HotelApi.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-        [HttpPost("{hotelId}")]
-        public IActionResult Create([FromRoute] Guid hotelId, [FromBody] CreateBody request)
+        private readonly IMediator _mediator;
+
+        public BookingController(IMediator mediator)
         {
-            return Ok();
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        public class CreateBody
+        [HttpPost("{hotelId}")]
+        public async Task<IActionResult> Create(
+            [FromRoute] Guid hotelId, 
+            [FromBody] BookRoomRequestBody request,
+            CancellationToken token = default)
         {
-            public DateTime CheckInDate { get; set; }
-
-            public DateTime CheckOutDate { get; set; }
-
-            public int NumberOfPeople { get; set; }
+            return await this.Handle(async () =>
+            {
+                var result = await _mediator.Send(new BookRoomRequest(hotelId, request), token);
+                return Ok(result);
+            });
         }
     }
 }

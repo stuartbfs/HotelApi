@@ -7,12 +7,12 @@ namespace HotelDomain.Data.Projections
     public class HotelRoomAvailability
     {
         public Guid HotelId { get; set; }
-        public string HotelName { get; set; }
+        public string HotelName { get; set; } = "";
 
         public Guid RoomId { get; set; }
-        public string RoomName { get; set; }
+        public string RoomName { get; set; } = "";
 
-        public string RoomType { get; set; }
+        public string RoomType { get; set; } = "";
         public int RoomCapacity { get; set; }
 
         public bool HasBooking { get; set; }
