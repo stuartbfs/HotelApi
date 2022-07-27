@@ -14,6 +14,19 @@ namespace HotelDomain.Data.Repository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public async Task<bool> HotelExists(Guid hotelId)
+        {
+            return await _context.Hotels.AnyAsync(x => x.HotelId == hotelId);
+        }
+
+        public async Task<List<BookingDetails>> GetBooking(int bookingNumber)
+        {
+            return await _context.RoomBookings
+                .Where(x => x.Booking.BookingNumber == bookingNumber)
+                .Select(BookingDetails.Projection)
+                .ToListAsync();
+        }
+
         public async Task<Booking> BookRoom(
             Guid hotelId, 
             string firstName, 

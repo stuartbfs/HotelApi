@@ -1,5 +1,6 @@
-﻿using FluentValidation;
+﻿using HotelDomain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace HotelApi.Infrastructure
 {
@@ -11,9 +12,13 @@ namespace HotelApi.Infrastructure
             {
                 return await controllerAction();
             }
-            catch (ValidationException)
+            catch (ValidationException ex)
             {
-                return controller.BadRequest();
+                return controller.BadRequest(ex.Errors);
+            }
+            catch (BadRequestException ex)
+            {
+                return controller.BadRequest(new { Error = ex.Message });
             }
         }
     }

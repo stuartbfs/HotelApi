@@ -1,6 +1,5 @@
 ﻿using HotelDomain.Data;
 using HotelDomain.Data.Seed;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelApi.Controllers
@@ -20,6 +19,13 @@ namespace HotelApi.Controllers
         public async Task<IActionResult> Reset()
         {
             await HotelsDbContextDataSeed.Initialize(_context);
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Seed()
+        {
+            await HotelsDbContextDataSeed.SeedBookings(_context);
             return Ok();
         }
     }

@@ -1,5 +1,7 @@
 ﻿using HotelDomain.Data.Entities;
+using HotelDomain.Exceptions;
 using HotelDomain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelDomain.Data.Seed
 {
@@ -17,18 +19,16 @@ namespace HotelDomain.Data.Seed
                 var hotel = new Hotel
                 {
                     HotelName = hotelName,
-                    Rooms = new List<Room>(6)
-                };
-
-                for (var i = 1; i <= 6; i++)
-                {
-                    var room = new Room
+                    Rooms = new List<Room>
                     {
-                        RoomName = $"Room 10{i}",
-                        RoomTypeId = GetRoomType()
-                    };
-                    hotel.Rooms.Add(room);
-                }
+                        new Room { RoomName = "Room 101", RoomTypeId = RoomTypes.Single.RoomTypeId },
+                        new Room { RoomName = "Room 102", RoomTypeId = RoomTypes.Single.RoomTypeId },
+                        new Room { RoomName = "Room 103", RoomTypeId = RoomTypes.Double.RoomTypeId },
+                        new Room { RoomName = "Room 104", RoomTypeId = RoomTypes.Double.RoomTypeId },
+                        new Room { RoomName = "Room 105", RoomTypeId = RoomTypes.Double.RoomTypeId },
+                        new Room { RoomName = "Room 106", RoomTypeId = RoomTypes.Deluxe.RoomTypeId },
+                    }
+                };
 
                 await context.Hotels.AddAsync(hotel);
             }
@@ -36,9 +36,14 @@ namespace HotelDomain.Data.Seed
             await context.SaveChangesAsync();
         }
 
-        private static Guid GetRoomType()
+        public static async Task SeedBookings(HotelsDbContext context)
         {
-            return RoomTypes.All[_random.Next(0, 3)].RoomTypeId;
+            await context.Database.EnsureCreatedAsync();
+
+            if (!await context.Hotels.AnyAsync())
+            {
+                throw new ValidationException("Hotel data not found. Try Reset first");
+            }
         }
 
         private static IEnumerable<string> GetRandomizedHotelNames()

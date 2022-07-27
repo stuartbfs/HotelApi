@@ -17,7 +17,7 @@ namespace HotelApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] string name, [FromQuery] int page, [FromQuery] int pageSize, CancellationToken token = default)
+        public async Task<IActionResult> Find([FromQuery] string name, [FromQuery] int page = 1, [FromQuery] int pageSize = 10, CancellationToken token = default)
         {
             return await this.Handle(async () =>
             {

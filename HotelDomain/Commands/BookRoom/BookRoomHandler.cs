@@ -1,4 +1,5 @@
 ﻿using HotelDomain.Data.Repository;
+using HotelDomain.Exceptions;
 using MediatR;
 
 namespace HotelDomain.Commands.BookRoom
@@ -14,6 +15,11 @@ namespace HotelDomain.Commands.BookRoom
 
         public async Task<BookRoomResponse> Handle(BookRoomRequest request, CancellationToken cancellationToken)
         {
+            if (!await _repository.HotelExists(request.HotelId))
+            {
+                throw new ValidationException("Unknown hotel");
+            }
+
             var booking = await _repository.BookRoom(
                 request.HotelId, 
                 request.FirstName, 
@@ -23,9 +29,11 @@ namespace HotelDomain.Commands.BookRoom
                 request.RoomType, 
                 request.PartySize);
 
+            var bookingDetails = await _repository.GetBooking(booking.BookingNumber);
+
             return new BookRoomResponse
             {
-                BookingRef = booking.BookingNumber.ToString("D8")
+                Details = bookingDetails.ToArray()
             };
         }
     }

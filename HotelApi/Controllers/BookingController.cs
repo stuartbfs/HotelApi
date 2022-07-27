@@ -1,5 +1,6 @@
 ﻿using HotelApi.Infrastructure;
 using HotelDomain.Commands.BookRoom;
+using HotelDomain.Queries.FindBooking;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,17 @@ namespace HotelApi.Controllers
         public BookingController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] string bookingRef,
+            CancellationToken token = default)
+        {
+            return await this.Handle(async () =>
+            {
+                var result = await _mediator.Send(new FindBookingRequest(bookingRef), token);
+                return Ok(result);
+            });
         }
 
         [HttpPost("{hotelId}")]

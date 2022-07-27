@@ -1,8 +1,8 @@
 ﻿using HotelDomain.Data.Projections;
 
-namespace HotelDomain.Commands.BookRoom
+namespace HotelDomain.Queries.FindBooking
 {
-    public class BookRoomResponse
+    public class FindBookingResponse
     {
         public BookingDetails[] Details { get; set; }
     }
