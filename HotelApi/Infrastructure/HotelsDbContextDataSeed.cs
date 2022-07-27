@@ -12,13 +12,10 @@ namespace HotelApi.Infrastructure
 
         public static async Task Initialize(HotelsDbContext context)
         {
-            await context.Database.EnsureCreatedAsync();
-
             await context.Database.ExecuteSqlRawAsync("DELETE FROM RoomBookings");
             await context.Database.ExecuteSqlRawAsync("DELETE FROM Bookings");
             await context.Database.ExecuteSqlRawAsync("DELETE FROM Rooms");
             await context.Database.ExecuteSqlRawAsync("DELETE FROM Hotels");
-
 
             foreach (var hotelName in GetRandomizedHotelNames())
             {
