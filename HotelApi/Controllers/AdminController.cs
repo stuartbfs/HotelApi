@@ -1,5 +1,5 @@
-﻿using HotelDomain.Data;
-using HotelDomain.Data.Seed;
+﻿using HotelApi.Infrastructure;
+using HotelDomain.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelApi.Controllers

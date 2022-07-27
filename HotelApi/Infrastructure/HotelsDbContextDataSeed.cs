@@ -1,9 +1,10 @@
-﻿using HotelDomain.Data.Entities;
+﻿using HotelDomain.Data;
+using HotelDomain.Data.Entities;
 using HotelDomain.Exceptions;
 using HotelDomain.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace HotelDomain.Data.Seed
+namespace HotelApi.Infrastructure
 {
     public static class HotelsDbContextDataSeed
     {
@@ -11,8 +12,13 @@ namespace HotelDomain.Data.Seed
 
         public static async Task Initialize(HotelsDbContext context)
         {
-            await context.Database.EnsureDeletedAsync();
             await context.Database.EnsureCreatedAsync();
+
+            await context.Database.ExecuteSqlRawAsync("DELETE FROM RoomBookings");
+            await context.Database.ExecuteSqlRawAsync("DELETE FROM Bookings");
+            await context.Database.ExecuteSqlRawAsync("DELETE FROM Rooms");
+            await context.Database.ExecuteSqlRawAsync("DELETE FROM Hotels");
+
 
             foreach (var hotelName in GetRandomizedHotelNames())
             {
