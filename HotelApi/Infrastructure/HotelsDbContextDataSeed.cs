@@ -1,5 +1,6 @@
 ﻿using HotelDomain.Data;
 using HotelDomain.Data.Entities;
+using HotelDomain.Data.Projections;
 using HotelDomain.Exceptions;
 using HotelDomain.Model;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,10 @@ namespace HotelApi.Infrastructure
             await context.Database.ExecuteSqlRawAsync("DELETE FROM Bookings");
             await context.Database.ExecuteSqlRawAsync("DELETE FROM Rooms");
             await context.Database.ExecuteSqlRawAsync("DELETE FROM Hotels");
+        }
 
+        public static async Task<List<HotelDetails>> SeedHotels(HotelsDbContext context)
+        {
             foreach (var hotelName in GetRandomizedHotelNames())
             {
                 var hotel = new Hotel
@@ -37,16 +41,10 @@ namespace HotelApi.Infrastructure
             }
 
             await context.SaveChangesAsync();
-        }
 
-        public static async Task SeedBookings(HotelsDbContext context)
-        {
-            await context.Database.EnsureCreatedAsync();
-
-            if (!await context.Hotels.AnyAsync())
-            {
-                throw new ValidationException("Hotel data not found. Try Reset first");
-            }
+            return await context.Hotels
+                .Select(HotelDetails.Projection)
+                .ToListAsync();
         }
 
         private static IEnumerable<string> GetRandomizedHotelNames()

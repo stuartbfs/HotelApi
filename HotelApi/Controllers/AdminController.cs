@@ -19,14 +19,14 @@ namespace HotelApi.Controllers
         public async Task<IActionResult> Reset()
         {
             await HotelsDbContextDataSeed.Initialize(_context);
-            return Ok();
+            return Ok("Deleted all data");
         }
 
-        [HttpPost]
+        [HttpPost(nameof(Seed))]
         public async Task<IActionResult> Seed()
         {
-            await HotelsDbContextDataSeed.SeedBookings(_context);
-            return Ok();
+            var hotels = await HotelsDbContextDataSeed.SeedHotels(_context);
+            return Ok(hotels);
         }
     }
 }
