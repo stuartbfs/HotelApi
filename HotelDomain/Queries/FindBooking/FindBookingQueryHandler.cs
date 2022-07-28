@@ -1,4 +1,6 @@
-﻿using HotelDomain.Data.Repository;
+﻿using FluentValidation.Validators;
+using HotelDomain.Data.Repository;
+using HotelDomain.Exceptions;
 using HotelDomain.Model;
 using MediatR;
 
@@ -19,10 +21,12 @@ namespace HotelDomain.Queries.FindBooking
 
             var bookingDetails = await _repository.GetBooking(bookingNumber);
 
-            return new FindBookingResponse
+            if (bookingDetails is null || !bookingDetails.Any())
             {
-                Details = bookingDetails.ToArray()
-            };
+                throw new NotFoundException("Booking not found.");
+            }
+
+            return new FindBookingResponse(bookingDetails);
         }
     }
 }

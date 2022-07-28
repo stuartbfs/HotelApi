@@ -4,6 +4,11 @@ namespace HotelDomain.Commands.BookRoom
 {
     public class BookRoomResponse
     {
-        public BookingDetails[] Details { get; set; }
+        public BookRoomResponse(IEnumerable<BookingDetails> details)
+        {
+            Details = details.ToArray();
+        }
+
+        public BookingDetails[] Details { get; }
     }
 }

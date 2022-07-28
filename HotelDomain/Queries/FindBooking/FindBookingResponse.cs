@@ -4,6 +4,11 @@ namespace HotelDomain.Queries.FindBooking
 {
     public class FindBookingResponse
     {
-        public BookingDetails[] Details { get; set; }
+        public FindBookingResponse(IEnumerable<BookingDetails> details)
+        {
+            Details = details.ToArray();
+        }
+
+        public BookingDetails[] Details { get; }
     }
 }

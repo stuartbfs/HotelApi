@@ -12,6 +12,14 @@ namespace HotelApi.Infrastructure
             {
                 return await controllerAction();
             }
+            catch (NotFoundException ex)
+            {
+                return controller.NotFound(ex.Message);
+            }
+            catch (HotelDomain.Exceptions.ValidationException ex)
+            {
+                return controller.BadRequest(ex.Message);
+            }
             catch (ValidationException ex)
             {
                 return controller.BadRequest(ex.Errors);

@@ -6,7 +6,7 @@ namespace HotelDomain.Data.Projections
 {
     public class BookingDetails
     {
-        public string BookingNumber { get; set; }
+        public string BookingNumber { get; set; } = string.Empty;
 
         public DateTime BookingDate { get; set; }
 

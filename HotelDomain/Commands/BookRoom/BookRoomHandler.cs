@@ -17,7 +17,7 @@ namespace HotelDomain.Commands.BookRoom
         {
             if (!await _repository.HotelExists(request.HotelId))
             {
-                throw new ValidationException("Unknown hotel");
+                throw new NotFoundException("Unknown hotel");
             }
 
             var booking = await _repository.BookRoom(
@@ -31,10 +31,7 @@ namespace HotelDomain.Commands.BookRoom
 
             var bookingDetails = await _repository.GetBooking(booking.BookingNumber);
 
-            return new BookRoomResponse
-            {
-                Details = bookingDetails.ToArray()
-            };
+            return new BookRoomResponse(bookingDetails);
         }
     }
 }
