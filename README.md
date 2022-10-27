@@ -1,5 +1,5 @@
 # Hotel Room Booking Example
-Api backend for a Hotel booking system.
+Api backend for a Hotel booking system (this was for a job interview that I didn't get).
 
 ## Assumptions
 - Deluxe rooms can have 2 people in them
